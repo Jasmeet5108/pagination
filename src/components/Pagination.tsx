@@ -27,7 +27,7 @@ const Pagination = ({ hasNextPage, hasPrevPage, data, currentPage, totalPages }:
             pages.push(
                 <button
                     key={i}
-                    className={`pagination-button ${currentPage === i ? 'text-sky-500' : ''}`}
+                    className={`w-8 py-1 px-2 ${currentPage === i ? 'bg-sky-500' : ''}`}
                     onClick={() => goToPage(i)}
                 >
                     {i}
@@ -41,9 +41,9 @@ const Pagination = ({ hasNextPage, hasPrevPage, data, currentPage, totalPages }:
         <>
             <div className='text-xl font-bold my-3'>Pagination</div>
 
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-5">
                 <button
-                    className='bg-blue-500 text-white p-1'
+                    className={`${!hasPrevPage ? "bg-gray-500" : "bg-blue-500"} text-white p-1 ${!hasPrevPage ? "cursor-not-allowed" : ""}`}
                     disabled={!hasPrevPage}
                     onClick={() => {
                         router.push(`/?page=${Number(page) - 1}&per_page=${per_page}`)
@@ -55,33 +55,7 @@ const Pagination = ({ hasNextPage, hasPrevPage, data, currentPage, totalPages }:
                 {renderPageNumbers()}
 
                 <button
-                    className='bg-blue-500 text-white p-1'
-                    disabled={!hasNextPage}
-                    onClick={() => {
-                        router.push(`/?page=${Number(page) + 1}&per_page=${per_page}`)
-                    }}
-                >
-                    Next
-                </button>
-            </div>
-
-            {/* <div className='flex items-center gap-2'>
-                <button
-                    className='bg-blue-500 text-white p-1'
-                    disabled={!hasPrevPage}
-                    onClick={() => {
-                        router.push(`/?page=${Number(page) - 1}&per_page=${per_page}`)
-                    }}
-                >
-                    Prev
-                </button>
-
-                <div>
-                    {page} / {Math.ceil(data.length / Number(per_page))}
-                </div>
-
-                <button
-                    className='bg-blue-500 text-white p-1'
+                    className={`${!hasNextPage ? "bg-gray-500" : "bg-blue-500"} text-white p-1 ${!hasNextPage ? "cursor-not-allowed" : ""}`}
                     disabled={!hasNextPage}
                     onClick={() => {
                         router.push(`/?page=${Number(page) + 1}&per_page=${per_page}`)
@@ -90,6 +64,34 @@ const Pagination = ({ hasNextPage, hasPrevPage, data, currentPage, totalPages }:
                     Next
                 </button>
             </div> */}
+
+            <div className='flex items-center gap-5'>
+                <button
+                    className={`${!hasPrevPage ? "bg-gray-500" : "bg-blue-500"} text-white p-1 ${!hasPrevPage ? "cursor-not-allowed" : ""}`}
+                    disabled={!hasPrevPage}
+                    onClick={() => {
+                        router.push(`/?page=${Number(page) - 1}&per_page=${per_page}`)
+                    }}
+                >
+                    Prev
+                </button>
+
+                <div className='flex gap-2'>
+                    <p>{page}</p> 
+                    <p>/</p>
+                    <p>{Math.ceil(data.length / Number(per_page))}</p>
+                </div>
+
+                <button
+                    className={`${!hasNextPage ? "bg-gray-500" : "bg-blue-500"} text-white p-1 ${!hasNextPage ? "cursor-not-allowed" : ""}`}
+                    disabled={!hasNextPage}
+                    onClick={() => {
+                        router.push(`/?page=${Number(page) + 1}&per_page=${per_page}`)
+                    }}
+                >
+                    Next
+                </button>
+            </div>
         </>
     )
 }
